@@ -1,40 +1,27 @@
-from typing import List, Optional, Dict, Any
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from typing import List, Optional, Dict
 
+class TranscribeParams(BaseModel):
+    separation_enabled: Optional[bool] = None
+    separation_method: Optional[str] = None
+    model_size: Optional[str] = None
+    language_hint: Optional[str] = None
+    diarization: Optional[bool] = False
 
 class SegmentOut(BaseModel):
     start: float
     end: float
     text: str
-    speaker: Optional[str] = None  # added for diarization
-
-
-class SeparationOut(BaseModel):
-    enabled: bool
-    method: str
-    fallback: Optional[bool] = False
-    message: Optional[str] = None
-
 
 class PipelineOut(BaseModel):
-    separation: SeparationOut
-    transcription: Dict[str, Any]
-    diarization: Optional[Dict[str, Any]] = None
-
+    separation: Dict
+    transcription: Dict
 
 class TimingsOut(BaseModel):
     load: int
     separation: int
     transcription: int
     total: int
-    diarization: Optional[int] = None
-
-
-class DiarizationSegment(BaseModel):
-    start: float
-    end: float
-    speaker: str
-
 
 class TranscribeResponse(BaseModel):
     request_id: str
@@ -45,6 +32,4 @@ class TranscribeResponse(BaseModel):
     text: str
     language: str
     timings_ms: TimingsOut
-    diarization_segments: Optional[List[DiarizationSegment]] = None
-
 
