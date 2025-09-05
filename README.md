@@ -23,5 +23,6 @@ Containerized microservice that:
 #docker compose up
 
 docker build --no-cache -t speech-sep-asr-poc .
+
 docker run -it --rm -p 8080:8080 speech-sep-asr-poc
 
