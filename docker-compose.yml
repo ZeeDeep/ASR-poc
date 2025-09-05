@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    image: speech-sep-asr-poc:latest
+    ports:
+      - "8080:8080"
+    environment:
+      # tweak defaults here
+      WHISPER_MODEL: small
+      SEPARATION_ENABLED: "true"
+      SEPARATION_METHOD: demucs
+      DEMUCS_MODEL: htdemucs
+      ASR_COMPUTE_TYPE: int8
+    deploy:
+      resources:
+        reservations: {}
+    # For GPU hosts (optional):
+    # runtime: nvidia
+    # environment:
+    #   NVIDIA_VISIBLE_DEVICES: all
+

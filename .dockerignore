@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.DS_Store
+.vscode/
+.venv/
+.cache/
+dist/
+build/
+
